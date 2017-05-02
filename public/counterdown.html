@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="setTime" action="javascript:void(0)">
+        <input id="hr" type="number">
+        <input id="min" type="number">
+        <input id="sec" type="number">
+        <button type="submit">Set</button>
+    </form>
+    <p id="demo"></p>
+    <script type="text/javascript">
+    //document.getElementById('click').addEventListener('click', startCounter(false), false);
+    
+    $("#setTime").submit(function() {
+    	var value = Math.floor($('#hr').val() * 3600);
+    	value += Math.floor($('#min').val() * 60);
+    	value += Math.floor($('#sec').val());        
+        console.log(value)
+        startCountdown(value);
+        return;
+    });
+
+    function startCountdown(time) {    	
+        var counter = setInterval(function() {
+            time--;
+            var hours = Math.floor(time / 3600);
+            var minutes = Math.floor((time / 60) % 60);
+            var seconds = Math.floor(time % 60);
+            document.getElementById("demo").innerHTML = hours + "h " + minutes + "m " + seconds + "s";
+            if (time == 0) {
+                clearInterval(counter);                
+            }
+        }, 1000);
+    }
+    </script>
+</body>
+
+</html>
